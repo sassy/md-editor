@@ -1,0 +1,17 @@
+{
+  "name": "md-editor",
+  "version": "0.0.1",
+  "description": "",
+  "main": "nwapp/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "nwbuild  -p 'osx64' ./ -o ./build"
+  },
+  "author": "Satoshi Watanabe",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-util": "^3.0.2",
+    "node-webkit-builder": "^1.0.6"
+  }
+}
