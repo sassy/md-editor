@@ -1,14 +1,14 @@
 # md-editor
 markdown editor in desktop. 
 
-# build
+## build
 
 ```
 $ npm install
 $ gulp
 ```
 
-# dependency packages
+## dependency packages
 * bootstrap
 * github-markdown-css
 * jquery
