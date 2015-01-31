@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="./css/github-markdown.css">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
   <style>
     .markdown-body {
         min-width: 200px;
-        max-width: 790px;
+        max-width: 1190px;
         margin: 0 auto;
-        height: 300px;
+        height: 400px;
         overflow : scroll;
         padding: 30px;
     }
@@ -23,6 +24,31 @@
             var ret = marked($(this).val());
             $('#preview').html(ret);
         });
+        $("#saveFileButton").click(function() {
+            var saving = $("#saveFile");
+            saving.change(function(evt) {
+                var filename = $(this).val();
+                var content = $("#editor").val();
+
+                var fs = require('fs');
+                var s = new Buffer("\udeff" + content, 'utf8').slice(3).toString();
+                fs.writeFile(filename, s, {encoding : 'utf8'});
+            });
+            saving.trigger('click');
+        });
+        $("#openFileButton").click(function() {
+            var opening = $("#openFile");
+            opening.change(function(evt) {
+                var filename = $(this).val();
+                var fs = require('fs');
+                fs.readFile(filename, function(err, data) {
+                    if (err) throw err;
+                    $("#editor").val(data);
+                    $("#editor").trigger('keyup');
+                });
+            });
+            opening.trigger('click');
+        });
     });
   </script>
 </head>
@@ -31,8 +57,12 @@
     <article id="preview" class="markdown-body">
     </article>
     <div>
-      <textarea id="editor" class="form-control" cols="100" rows="10"></textarea>
+      <textarea id="editor" class="form-control" cols="100" rows="15"></textarea>
     </div>
+    <button id="saveFileButton" type="button" class="btn btn-primary btn-lg">Save File</button>
+    <button id="openFileButton" type="button" class="btn btn-primary btn-lg">Open File</button>
+    <input style="display:none;" id="saveFile" type="file" nwsaveas />
+    <input style="display:none;" id="openFile" type="file" />
   </div>
 </body>
 </html>

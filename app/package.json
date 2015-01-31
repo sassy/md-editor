@@ -5,7 +5,8 @@
   "main": "./index.html",
   "window": {
     "toolbar": false,
-    "height": 600
+    "width" : 1200,
+    "height": 800
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
